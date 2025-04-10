@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BakedwithLauv - Cookie Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FAE8ED; /* Lightest pink */
+            color: #5a1a1a;
+            line-height: 1.6;
+        }
+
+        /* ===== PINK HEADER WITH YOUR PALETTE ===== */
+        header {
+            background: linear-gradient(135deg, #FFA2B9 0%, #FFC2D1 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: "";
+            background: url('cookie-bg.png') center/cover;
+            opacity: 0.15;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); /* Black outline preserved */
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background-color: #FFB2C5;
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #5a1a1a;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #5a1a1a;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== 3D COOKIE PRODUCTS ===== */
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #9b2727;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .product {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            width: 280px;
+            box-shadow: 0 10px 30px rgba(255,178,197,0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .product:hover {
+            transform: translateY(-10px) rotateY(10deg);
+            box-shadow: 0 15px 35px rgba(255,178,197,0.5);
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            transform: translateZ(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover img {
+            transform: translateZ(30px) scale(1.05);
+        }
+
+        .product h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #5a1a1a;
+        }
+
+        .product p {
+            color: #777;
+            margin-bottom: 1.5rem;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #9b2727;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== PINK BUTTONS ===== */
+        .btn-3d {
+            background: #FFA2B9;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255,162,185,0.4);
+            display: inline-block;
+        }
+
+        .btn-3d:hover {
+            background: #FF8FAB;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,162,185,0.6);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        #testimonials {
+            background-color: #FDD5DF;
+        }
+
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            font-family: Georgia, serif;
+            font-size: 5rem;
+            color: #FFB2C5;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            line-height: 1;
+            opacity: 0.2;
+        }
+
+        .rating {
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, #FFA2B9 0%, #FFB2C5 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: #FFE8ED;
+        }
+
+        /* ===== MOBILE RESPONSIVENESS ===== */
+        @media (max-width: 768px) {
+            header {
+                padding: 4rem 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav li {
+                margin: 0.5rem 0;
+            }
+
+            .product {
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .product:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+    <!-- Firebase App (Core) SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <!-- Firebase Firestore SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <!-- Firebase Authentication SDK (if needed) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+</head>
+<body>
+    <!-- ===== HEADER WITH BLACK TEXT OUTLINE ===== -->
+    <header>
+        <div class="header-content">
+            <h1>BakedwithLauv</h1>
+            <p class="tagline">Love at First Bite</p>
+            <div class="header-buttons">
+                <button class="btn-3d pulse">Shop Now</button>
+                <button class="btn-3d pulse" style="background-color: #FF8FAB; margin-left: 1rem;">Our Story</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <ul>
+            <li><a href="#cookies">Our Cookies</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== COOKIE PRODUCTS ===== -->
+    <section id="cookies">
+        <h2 class="section-title">Our Delicious Cookies</h2>
+        <div class="product-grid">
+            <!-- Oreo Cookie -->
+            <div class="product">
+                <img src="CookiesMarsh.png" alt="Oreo Soft Cookie">
+                <h3>Oreo Soft Cookie</h3>
+                <p>Soft and chewy with the perfect blend of Oreo cookies</p>
+                <span class="price">₱120</span>
+                <button class="btn-3d">Add to Cart</button>
+            </div>
+
+            <!-- Cookie Cereals -->
+            <div class="product">
+                <img src="Cookiehers.png" alt="Cookie Cereals">
+                <h3>Cookie Cereals</h3>
+                <p>Crispy and crunchy cookie-shaped cereals</p>
+                <span class="price">₱150</span>
+                <button class="btn-3d">Add to Cart</button>
+            </div>
+
+            <!-- Marshmallow Cookie -->
+            <div class="product">
+                <img src="CookiesMarsh.png" alt="Marshmallow Cookie">
+                <h3>Marshmallow Cookie</h3>
+                <p>Chewy cookie filled with gooey marshmallows</p>
+                <span class="price">₱135</span>
+                <button class="btn-3d">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about">
+        <h2 class="section-title">Our Story</h2>
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+            <p style="margin-bottom: 1.5rem;">
+                BakedwithLauv started as a small home bakery with a passion for creating delicious, 
+                high-quality cookies that bring joy to every bite.
+            </p>
+            <p>
+                We use only the finest ingredients, sourced locally whenever possible, and every 
+                batch is made with love and attention to detail.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section id="testimonials">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-content">
+                    These are hands down the best cookies I've ever had! The Oreo Soft Cookie is my absolute favorite.
+                </p>
+                <p class="testimonial-author">- Sarah M.</p>
+            </div>
+            
+            <div class="testimonial">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-content">
+                    The Marshmallow Cookies are incredible! Perfectly chewy with just the right amount of sweetness.
+                </p>
+                <p class="testimonial-author">- James T.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com/bakedwlauv" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p>&copy; 2025 BakedwithLauv. All rights reserved.</p>
+        <p style="margin-top: 1rem;">
+            <i class="fas fa-envelope"></i> bakedwithlauv@gmail.com | 
+            <i class="fas fa-phone"></i> 09774559860
+        </p>
+    </footer>
+
+    <!-- ===== 3D HOVER EFFECTS FOR MOBILE ===== -->
+    <script>
+        // Add touch support for 3D effects on mobile
+        document.querySelectorAll('.product').forEach(product => {
+            product.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(-5px) rotateY(10deg)';
+            });
+            
+            product.addEventListener('touchend', function() {
+                this.style.transform = 'translateY(0) rotateY(0)';
+            });
+        });
+    </script>
+
+    <script>
+        // Import and configure Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWc7RjEosVOi1YAw_7GBxDhQaEmaMmAtc",
+            authDomain: "bakedwlauv.firebaseapp.com",
+            projectId: "bakedwlauv",
+            storageBucket: "bakedwlauv.firebasestorage.app",
+            messagingSenderId: "38611590271",
+            appId: "1:38611590271:web:1c699474e61c49e07b334a"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        console.log("Firebase initialized successfully!");
+    </script>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const orderDetails = document.getElementById('orderDetails').value;
+
+            try {
+                // Save order to Firestore
+                await db.collection('orders').add({
+                    name,
+                    phone,
+                    address,
+                    orderDetails,
+                    timestamp: new Date()
+                });
+
+                alert('Order placed successfully!');
+            } catch (error) {
+                console.error('Error placing order:', error);
+                alert('Failed to place order. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
